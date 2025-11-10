@@ -1,5 +1,6 @@
 # SE-Interview-Preparation
 My SE Interview Preparation
+Những kiến thức tôi đã chuẩn bị cho phỏng vấn SE
 
 ## Tài liệu hạ tầng (infra)
 
