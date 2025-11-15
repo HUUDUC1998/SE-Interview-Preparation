@@ -1,3 +1,5 @@
+[back to Readme](../README.md)
+
 # Khi nào sẽ bị gì và nên làm gì
 - CPU cao trên container/service → response chậm, backlog request tăng → nên: tăng CPU limit mỗi task, tăng số task (scale out), tối ưu logic xử lý, phân tải.
 
