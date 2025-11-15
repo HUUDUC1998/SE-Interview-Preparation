@@ -2,6 +2,10 @@
 My SE Interview Preparation
 Những kiến thức tôi đã chuẩn bị cho phỏng vấn SE
 
+## Skill Map and Road Map to become Senior SE
+- [Skill map](system_engineer_road_map/skill_map.md) - Tổng quan các kiến thức cần thiết
+- [Road map](system_engineer_road_map/road_map.md)  - Tổng quan lịch trình trong 18 tháng
+
 ## Tài liệu hạ tầng (infra)
 
 - [Những kiến thức cơ bản cần biết](infra/fundamental.md) — Tổng quan về container, ECS, cách cấu hình CPU & memory, và xử lý sự cố cơ bản.
