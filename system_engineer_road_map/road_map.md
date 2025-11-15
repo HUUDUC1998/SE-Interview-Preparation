@@ -45,4 +45,38 @@ gantt
     Large-Scale Self Project           :milestone, p5e, after p5c p5d, 45d
     AWS ECS/K8s Deployment             :crit, p5f, after p5e, 30d
 ```
+
+```mermaid
+timeline
+    title Roadmap 12 Tháng Học Web Engineering (Backend-oriented Fullstack)
+
+    section Fundamental (Month 1–2)
+        HTML/CSS/JS cơ bản : tháng 1
+        Git, GitHub workflow : tháng 1
+        Ruby + OOP + testing cơ bản : tháng 2
+
+    section Backend Core (Month 3–5)
+        Rails fundamentals: MVC, routes, models : tháng 3
+        ActiveRecord, validations, callbacks, services : tháng 3–4
+        API design + auth (JWT, sessions) : tháng 4
+        Background jobs, caching, mailers : tháng 5
+
+    section Database & Infra (Month 6–8)
+        MySQL/PostgreSQL tối ưu query : tháng 6
+        Indexing, transactions, locking : tháng 6
+        Docker, containerization, ECS basics : tháng 7
+        CI/CD pipelines, GitHub Actions, Deploy to AWS : tháng 7–8
+
+    section System Design (Month 9–10)
+        Scalability patterns (LB, caching, sharding) : tháng 9
+        Message queue (SQS, Kafka), event-driven : tháng 9
+        Observability (logging, monitoring, alerts) : tháng 10
+
+    section Final Projects (Month 11–12)
+        Xây e-commerce mini scale (Amazon-like) : tháng 11
+        Optimize, load test, autoscaling setup : tháng 12
+        Hoàn thiện CV + Portfolio : tháng 12
+
+```
+
 [back to Readme](../README.md)
