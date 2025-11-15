@@ -1,0 +1,3 @@
+# AWS Architect Mindset
+
+TODO
