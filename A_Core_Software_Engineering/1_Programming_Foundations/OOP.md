@@ -165,9 +165,12 @@ puts Cat.new.speak() # => meow meow
 https://github.com/marina-ferreira/99_bottles_of_oop
 
 ## Chapter 1 - Rediscovering Simplicity
+- Không nên trừu tượng hoá code quá sớm khi mà mọi thứ vẫn chưa rõ ràng. Chỉ nên trừu tượng hoá code khi đã hiểu rõ code. Chúng ta nên chống lại việc trừu tượng hoá code cho đến khi cần thiết
+
+### Simplifying Code (Làm đơn giản hoá code)
+- Code chúng ta viết thường sẽ có 2 mục tiêu mâu thuẩn với nhau. Đủ cụ thể để có thể hiểu và đủ trừu tượng để có thể mở rộng. Nếu viết code quá cụ thể thì sẽ khó mở rộng và ngược lại nếu viết code quá trừu tượng thì sẽ khó hiểu. Cho nên việc của lập trình viên là tìm được điểm hoàn hảo ở giữa điểm trừu tượng và diểm cụ thể.
+
 
 ### Making the Code Clear (Viết code rõ ràng)
 
 - Để viết code dễ hiểu trước hết cần phải làm rõ phạm vi của vấn đề. Nếu không làm rõ vấn đề trước mà viết code luôn thì code sẽ khó hiểu và khó bảo trì
-
-- Không nên trừu tượng hoá code quá sớm khi mà mọi thứ vẫn chưa rõ ràng. Chỉ nên trừu tượng hoá code khi đã hiểu rõ code. Chúng ta nên chống lại việc trừu tượng hoá code cho đến khi cần thiết
