@@ -169,3 +169,5 @@ https://github.com/marina-ferreira/99_bottles_of_oop
 ### Making the Code Clear (Viết code rõ ràng)
 
 - Để viết code dễ hiểu trước hết cần phải làm rõ phạm vi của vấn đề. Nếu không làm rõ vấn đề trước mà viết code luôn thì code sẽ khó hiểu và khó bảo trì
+
+- Không nên trừu tượng hoá code quá sớm khi mà mọi thứ vẫn chưa rõ ràng. Chỉ nên trừu tượng hoá code khi đã hiểu rõ code. Chúng ta nên chống lại việc trừu tượng hoá code cho đến khi cần thiết
