@@ -160,3 +160,12 @@ puts Cat.new.speak() # => meow meow
 ```
 
 [back to Readme](README.md)
+
+# Tóm tắt 99_bottles_of_oop
+https://github.com/marina-ferreira/99_bottles_of_oop
+
+## Chapter 1 - Rediscovering Simplicity
+
+### Making the Code Clear (Viết code rõ ràng)
+
+- Để viết code dễ hiểu trước hết cần phải làm rõ phạm vi của vấn đề. Nếu không làm rõ vấn đề trước mà viết code luôn thì code sẽ khó hiểu và khó bảo trì
