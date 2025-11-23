@@ -101,8 +101,62 @@ ruby.what_language # => Using ruby
 ```
 
 3. Polymorphim(Tính đa hình)
+- Tính đa hình cho phép các đối tượng cùng kiểu có thể có các hành vì khác nhau
+- Nghĩa là ta có thể định nghĩa các phương thức cùng tên nhưng có các hành vi khác nhau có các lớp con khác nhau
+Ví dụ
+```ruby
+class Animal
+  def speak 
+    raise NotImplementedError, "Subclasses must implement the 'area' method."
+  end
+end
+
+class Dog < Animal
+  def speak
+    "woo woo"
+  end
+end
+
+
+class Cat < Animal
+  def speak
+    "meow meow"
+  end
+end
+
+puts Dog.new.speak() # => woo woo
+puts Cat.new.speak() # => meow meow
+```
 
 4. Tính trừu tượng
+- Tính trừu tượng cho phép ta xây dựng một interface. Nghĩa là ta có thể xây dựng một class trừu tượng với những phương thức không có logic ở bên trong
+- Ta chỉ định nghĩa các phương thức thực sự hoạt động ở các lớp con
+- Làm như vậy khi đọc code ta chỉ cần đọc lớp trừu tượng trước thì ta sẽ hiểu được interface của các đối tượng
 
+- Với ví dụ bên dưới, ta có thể nói class Animal là một lớp trừu trượng. Có phương thức speak
+(với ngôn ngữ ruby thì không có khái niệm abstract class). Các lớp con(Dog, Cat) kế thừa lớp cha(Animal) và cụ thể hoá các phương thức(speak)
+```ruby
+class Animal
+  def speak 
+    raise NotImplementedError, "Subclasses must implement the 'area' method."
+  end
+end
+
+class Dog < Animal
+  def speak
+    "woo woo"
+  end
+end
+
+
+class Cat < Animal
+  def speak
+    "meow meow"
+  end
+end
+
+puts Dog.new.speak() # => woo woo
+puts Cat.new.speak() # => meow meow
+```
 
 [back to Readme](README.md)

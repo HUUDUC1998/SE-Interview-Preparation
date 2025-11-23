@@ -44,3 +44,24 @@ ruby = RubyProgramingLanguage.new("ruby")
 
 puts ruby.name # => "ruby"
 ruby.what_language
+
+class Animal
+  def speak 
+  end;
+end
+
+class Dog < Animal
+  def speak
+    "woo woo"
+  end
+end
+
+
+class Cat < Animal
+  def speak
+    "meow meow"
+  end
+end
+
+puts Dog.new.speak()
+puts Cat.new.speak()
