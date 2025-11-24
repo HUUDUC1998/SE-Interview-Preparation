@@ -168,7 +168,27 @@ https://github.com/marina-ferreira/99_bottles_of_oop
 - Không nên trừu tượng hoá code quá sớm khi mà mọi thứ vẫn chưa rõ ràng. Chỉ nên trừu tượng hoá code khi đã hiểu rõ code. Chúng ta nên chống lại việc trừu tượng hoá code cho đến khi cần thiết
 
 ### Simplifying Code (Làm đơn giản hoá code)
-- Code chúng ta viết thường sẽ có 2 mục tiêu mâu thuẩn với nhau. Đủ cụ thể để có thể hiểu và đủ trừu tượng để có thể mở rộng. Nếu viết code quá cụ thể thì sẽ khó mở rộng và ngược lại nếu viết code quá trừu tượng thì sẽ khó hiểu. Cho nên việc của lập trình viên là tìm được điểm hoàn hảo ở giữa điểm trừu tượng và diểm cụ thể.
+Code chúng ta viết thường sẽ có 2 mục tiêu mâu thuẩn với nhau. Đủ cụ thể để có thể hiểu và đủ trừu tượng để có thể mở rộng. Nếu viết code quá cụ thể thì sẽ khó mở rộng và ngược lại nếu viết code quá trừu tượng thì sẽ khó hiểu. Cho nên việc của lập trình viên là tìm được điểm hoàn hảo ở giữa điểm trừu tượng và diểm cụ thể.
+
+#### Incomprehensibly Concise
+
+- Consistency (Sự nhất quán)
+
+  - Code cần có sự nhất quán
+  - Ví dụ trong method bên dưới có viết 2 kiểu logic điều kiện trong cùng một method. `n == 0 ? 'No more' : n` và `'s' if n != 1`. Còn có 2 toán tử 3 ngôi lồng vào nhau nữa `n-1 < 0 ? 99 : n-1 == 0 ? 'no more' : n-1`
+  ```ruby
+  def verse(n)
+    "#{n == 0 ? 'No more' : n} bottle#{'s' if n != 1}" +
+    " of beer on the wall, " +
+    "#{n == 0 ? 'no more' : n} bottle#{'s' if n != 1} of beer.\n" +
+    "#{n > 0  ? "Take #{n > 1 ? 'one' : 'it'} down and pass it around"
+    : "Go to the store and buy some more"}, " +
+    "#{n-1 < 0 ? 99 : n-1 == 0 ? 'no more' : n-1} bottle#{'s' if n-1 != 1}"+
+    " of beer on the wall.\n"
+  end
+  ```
+  - Kiểu viết code thiếu tính nhất quán như này sẽ làm người đọc phải thay đổi cách suy nghĩ vì cách viết logic thay đổi. Làm cho người đọc phải suy nghĩ liên tục, khiến cho việc đọc code mất nhiều công sức và thời gian hơn mà không làm tăng thêm bất cứ giá trị nào
+  
 
 
 ### Making the Code Clear (Viết code rõ ràng)
