@@ -170,7 +170,7 @@ https://github.com/marina-ferreira/99_bottles_of_oop
 ### Simplifying Code (Làm đơn giản hoá code)
 Code chúng ta viết thường sẽ có 2 mục tiêu mâu thuẩn với nhau. Đủ cụ thể để có thể hiểu và đủ trừu tượng để có thể mở rộng. Nếu viết code quá cụ thể thì sẽ khó mở rộng và ngược lại nếu viết code quá trừu tượng thì sẽ khó hiểu. Cho nên việc của lập trình viên là tìm được điểm hoàn hảo ở giữa điểm trừu tượng và diểm cụ thể.
 
-#### Incomprehensibly Concise
+#### Incomprehensibly Concise (Ngắn gọn một cách khó hiểu)
 
 - Consistency (Sự nhất quán)
 
@@ -188,8 +188,33 @@ Code chúng ta viết thường sẽ có 2 mục tiêu mâu thuẩn với nhau. 
   end
   ```
   - Kiểu viết code thiếu tính nhất quán như này sẽ làm người đọc phải thay đổi cách suy nghĩ vì cách viết logic thay đổi. Làm cho người đọc phải suy nghĩ liên tục, khiến cho việc đọc code mất nhiều công sức và thời gian hơn mà không làm tăng thêm bất cứ giá trị nào
-  
 
+- Duplication (Sự trùng lặp)
+
+   - Cũng trong phương thức verse như ở trên,  `'s' if n != 1` và `'s' if n-1 != 1` có sự trùng lặp về logic
+   - Tồn tại sự trùng lặp về logic có nghĩa là còn tồn tại các định nghĩa chưa phát hiện vì chưa được cô lặp và đặt tên. Hãy nói cách, là đoạn code được viết trong tình trạng vấn đề hoặc yêu cầu chưa được làm rõ. Vì nếu vấn đề hoặc yêu cầu đã rõ ràng thì các logic cần thiết sẽ định nghĩa một cách rõ ràng và độc lập
+
+- Names (tên gọi)
+
+  - Terminology: Method and Sending Messages
+
+    - Trong thuật ngữ hướng đối tượng chung, "phương thức"(method) được định nghĩa trên một đối tượng và chứa hành vi.
+    - Gửi "tin nhắn"(message) đến một đối tượng để kích hoạt hành vi.
+    - Do đó, các phương thức được xác định và các thông điệp được gửi đi.
+    - Trong lập trinhf,có những ngôn ngữ mà mọi người thường dùng các thuật ngữ khác để chỉ những ý tưởng này. Ví dụ, có thể bạn sẽ thường nghe thấy "function" (hàm) hơn là "method" (phương thức), hoặc "call" (gọi) thay vì "send" (gửi).
+    - Mặc dù các thuật ngữ phương thức và hàm thường có thể hoán đổi cho nhau (ít nhất là khi đề cập đến các phương thức thể hiện trên đối tượng), nhưng các từ send và call lại hàm ý những điều hơi khác nhau. Hiểu được sự khác biệt này rất quan trọng đối với tư duy hướng đối tượng của bạn.
+    - “Sending a Message” là gì trong Ruby? Trong Ruby, mọi thứ xoay quanh objects. Khi object A muốn object B làm gì đó, A không gọi code của B — A chỉ gửi một thông điệp: `b.do_something`. A không cần biết B thực hiện như thế nào: Algorithm gì? Dùng gem gì? Data structure gì? B có rewrite nội bộ hay không? A chỉ quan tâm B làm được. Đây chính là “message sending” — A chỉ gửi ý định, không “gọi implementation”.
+    - Ví dụ, thay vì A object gọi `total = cart.items.map(&:price).sum` thì có thể gọi `total = cart.total`. Làm như thể này thì A object sẽ không cần biết quá nhiều về cart, giúp giảm sự phụ thuộc của A object và cart object. Ví dụ cụ thể thì nếu Cart yêu cầu dùng `sale_price` thay vì `price` thì đoạn code của A object sẽ bị lỗi nếu không sửa đúng lúc. Vì thế bằng các sử dụng method `total` của cart object, `total = cart.total`, ta sẽ không cần phải thay đổi code ở A object mà vẫn không bị lỗi.
+    - Rubyists giỏi (đặc biệt tư tưởng Sandi Metz) ghét việc: Lộ internal structure, Lộ instance variables, Expose getters vô tội vạ. Message sending giúp tránh điều đó.
+  - Và Message sending thì yêu cầu đặt tên rõ ràng, dể hiểu. Vì thông qua tên method mà ta có thể đoán được method đó làm gì. Tính rõ ràng của mã được xây dựng dựa trên tên.
+  - Khi viết một đoạn code, ta biết rõ nó làm gì. Do đó, trong quá trình phát triển ban đầu, cái giá(công sức bỏ ra để đọc va hiểu) phải trả cho những tên mã kém chất lượng tương đối thấp.Tuy nhiên, code được đọc nhiều hơn là được viết và chi phí cuối cùng của nó thường rất cao và do người khác chi trả.
+  - Đặt những câu hỏi sau đây sẽ giúp bạn hiểu rõ hơn về chi phí tiềm ẩn của một đoạn mã :
+
+     - How difficult was it to write?
+     - How hard is it to understand?
+     - How expensive will it be to change?
+  - Việc nhìn vào một đoạn mã cho thấy bạn muốn hiểu nó ngay lúc này. Câu hỏi 1 và 3 ở trên có thể liên quan hoặc không liên quan đến bạn, nhưng câu hỏi 2 thì luôn đúng.
+  - Code dễ hiểu khi nó phản ánh rõ ràng vấn đề mà nó đang giải quyết và do đó công khai phơi bày phạm vi của vấn đề đó.
 
 ### Making the Code Clear (Viết code rõ ràng)
 
