@@ -233,6 +233,25 @@ Code chúng ta viết thường sẽ có 2 mục tiêu mâu thuẩn với nhau. 
   - Nhưng đoạn code nay quá phức tạp nên có lẽ là không đáng để đánh đổi
   - Viết một đoạn code "thông minh" (đoạn code phức tạp) sẽ tạo ra niềm vui cho lập trình viên nhưng nên tránh việc đó làm ảnh hưởng đến việc đọc code
 
+- Concretely Abstract
+  - Well designed DRY code will save cost.
+  - You should name methods not after what they do, but after what they mean, what they represent in the context of your domain. you should name methods after the concept they represent rather than how they currently behave.
+
+- Shameless Green
+  - Khi bạn loại bỏ sự trùng lặp mã hoặc tạo một phương thức để đặt tên cho một đoạn mã, bạn sẽ thêm các lớp gián tiếp khiến mã trở nên trừu tượng hơn.
+  - Về lý thuyết, những sự trừu tượng này giúp mã nguồn dễ hiểu và dễ thay đổi hơn, nhưng trên thực tế, chúng thường gây ra tác dụng ngược lại.
+  - Một trong những thách thức lớn nhất của thiết kế là biết khi nào nên dừng lại, và việc đưa ra quyết định đúng đắn đòi hỏi phải đưa ra những đánh giá về mã lập trình.
+
+### Judging Code
+
+- Evaluating Code Based on Opinion
+- Evaluating Code Based on Facts
+  - Việc có những dữ liệu thống nhất để so sánh mã nguồn sẽ vô cùng hữu ích. Để tìm kiếm những dữ liệu này, phần này sẽ xem xét ba chỉ số khác nhau: Số dòng mã nguồn, Độ phức tạp Cyclomatic vàABC.
+  - Source Lines of Code ( Số dòng mã nguồn ): Số dòng mã (SLOC) phản ánh khối lượng mã, và mặc dù hữu ích cho một số mục đích, nhưng chỉ biết SLOC thôi là chưa đủ để dự đoán chất lượng mã.
+  - Cyclomatic Complexity(Độ phức tạp chu trình): Độ phức tạp chu trình không dự đoán được thời gian phát triển ứng dụng cũng không đo lường năng suất của lập trình viên. Mục đích của nó là xác định mã khó kiểm thử hoặc bảo trì, trực tiếp hướng đến chất lượng mã.
+  - Assignments, Branches and Conditions (ABC) Metric(Nhiệm vụ, Chi nhánh và Điều kiện): ABC là thước đo độ phức tạp. Mã nguồn phức tạp rất khó hiểu và khó thay đổi, do đó điểm ABC là thước đo gián tiếp cho chất lượng mã nguồn.
+  - Số liệu thống kê có thể không chính xác, nhưng ý kiến cá nhân cũng chẳng khá hơn. Thường xuyên kiểm tra số liệu sẽ giúp bạn giữ thái độ khiêm tốn và cải thiện chất lượng mã nguồn.
+
 ### Making the Code Clear (Viết code rõ ràng)
 
 - Để viết code dễ hiểu trước hết cần phải làm rõ phạm vi của vấn đề. Nếu không làm rõ vấn đề trước mà viết code luôn thì code sẽ khó hiểu và khó bảo trì
