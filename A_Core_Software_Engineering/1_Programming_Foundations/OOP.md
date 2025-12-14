@@ -233,6 +233,9 @@ Code chúng ta viết thường sẽ có 2 mục tiêu mâu thuẩn với nhau. 
   - Nhưng đoạn code nay quá phức tạp nên có lẽ là không đáng để đánh đổi
   - Viết một đoạn code "thông minh" (đoạn code phức tạp) sẽ tạo ra niềm vui cho lập trình viên nhưng nên tránh việc đó làm ảnh hưởng đến việc đọc code
 
+- Concretely Abstract
+  - Well designed DRY code will save cost.
+
 ### Making the Code Clear (Viết code rõ ràng)
 
 - Để viết code dễ hiểu trước hết cần phải làm rõ phạm vi của vấn đề. Nếu không làm rõ vấn đề trước mà viết code luôn thì code sẽ khó hiểu và khó bảo trì
