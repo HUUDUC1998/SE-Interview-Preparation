@@ -10,6 +10,10 @@ class MyArray
     length
   end
 
+  def is_empty?
+    length == 0
+  end
+
   private 
 
   attr_reader :elements
@@ -81,6 +85,26 @@ describe MyArray do
     end
     it do
       @my_array.size.must_equal 2
+    end
+  end
+
+  describe "#is_empty? when has 0 item" do
+    before do
+      @my_array = MyArray.new()
+    end
+
+    it do
+      @my_array.is_empty?.must_equal true
+    end
+  end
+
+  describe "#is_empty? when has 1 item" do
+    before do
+      @my_array = MyArray.new(1)
+    end
+
+    it do
+      @my_array.is_empty?.must_equal false
     end
   end
 end
