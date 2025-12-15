@@ -1,0 +1,68 @@
+class MyArray 
+  attr_reader :length
+
+  def initialize(*elements)
+    @elements = elements
+    @length = count_elements(elements)
+  end
+
+  def size
+    length
+  end
+
+  private 
+
+  attr_reader :elements
+
+  def count_elements(elements)
+    count = 0
+
+    for e in elements 
+      count += 1
+    end
+
+    count
+  end
+end
+
+
+# Tests
+require 'minitest/autorun'
+
+describe MyArray do
+  describe "length when 1 elements" do
+    before do
+      @my_array = MyArray.new(1)
+    end
+    it do
+      @my_array.length.must_equal 1
+    end
+  end
+
+  describe "length when 2 elements" do
+    before do
+      @my_array = MyArray.new(1,2)
+    end
+    it do
+      @my_array.length.must_equal 2
+    end
+  end
+
+  describe "#size when 1 elements" do
+    before do
+      @my_array = MyArray.new(1)
+    end
+    it do
+      @my_array.size.must_equal 1
+    end
+  end
+
+  describe "#size when 2 elements" do
+    before do
+      @my_array = MyArray.new(1,2)
+    end
+    it do
+      @my_array.size.must_equal 2
+    end
+  end
+end
