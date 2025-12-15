@@ -30,6 +30,15 @@ end
 require 'minitest/autorun'
 
 describe MyArray do
+  describe "length when 0 elements" do
+    before do
+      @my_array = MyArray.new()
+    end
+    it do
+      @my_array.length.must_equal 0
+    end
+  end
+
   describe "length when 1 elements" do
     before do
       @my_array = MyArray.new(1)
@@ -45,6 +54,15 @@ describe MyArray do
     end
     it do
       @my_array.length.must_equal 2
+    end
+  end
+
+  describe "#size when 0 elements" do
+    before do
+      @my_array = MyArray.new()
+    end
+    it do
+      @my_array.size.must_equal 0
     end
   end
 
