@@ -14,6 +14,20 @@ class MyArray
     length == 0
   end
 
+  def at(index)
+    return "index out of boudary" if index >= length
+
+    hash = {}
+    n = 0
+
+    for item in elements
+      hash[n] = item
+      n += 1
+    end
+
+    hash[index]
+  end
+
   private 
 
   attr_reader :elements
@@ -105,6 +119,24 @@ describe MyArray do
 
     it do
       @my_array.is_empty?.must_equal false
+    end
+  end
+
+  describe "at()" do
+    before do
+      @my_array = MyArray.new(1,2)
+    end
+
+    describe "with valid index" do
+      it do 
+        @my_array.at(0).must_equal 1
+      end
+    end
+
+    describe "with index out of boudary" do
+      it do 
+        @my_array.at(2).must_equal "index out of boudary"
+      end
     end
   end
 end
