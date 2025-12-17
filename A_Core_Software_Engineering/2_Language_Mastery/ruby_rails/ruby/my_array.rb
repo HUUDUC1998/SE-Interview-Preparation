@@ -28,6 +28,9 @@ class MyArray
     hash[index]
   end
 
+  def push(value)
+  end
+
   private 
 
   attr_reader :elements
@@ -136,6 +139,30 @@ describe MyArray do
     describe "with index out of boudary" do
       it do 
         @my_array.at(2).must_equal "index out of boudary"
+      end
+    end
+  end
+
+  describe "push()" do
+    describe "always" do
+      before do
+        @my_array = MyArray.new()
+      end
+
+      it do 
+        @my_array.push(1)
+        @my_array.length.must_equal 1
+      end
+    end
+
+    describe "always" do
+      before do
+        @my_array = MyArray.new()
+      end
+
+      it do 
+        @my_array.push(1)
+        @my_array.at(0).must_equal 1
       end
     end
   end
