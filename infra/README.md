@@ -30,6 +30,84 @@ Ví dụ
 - Có proxy (DB Proxy) không
 ```
 
+- HA là gì?
+
+  > HA = High Availability = hệ thống không dễ chết
+  > HA = có hỏng một phần, hệ thống vẫn chạy
+
+- Node là gì?
+
+  > Node = 1 máy / 1 instance đang chạy một vai trò
+
+- Replica là gì?
+
+  > Replica = bản sao
+  > Replica = DB copy dữ liệu từ DB chính
+
+**Có 2 loại chính:**
+
+Primary / Writer
+
+- DB chính
+- Ghi (INSERT / UPDATE)
+
+B. Replica / Reader
+
+- DB phụ
+- Chỉ đọc (SELECT)
+
+- Failover là gì?
+
+> Failover = khi node chính chết, hệ thống tự chuyển sang node khác
+
+**Failover khác restart ở đâu?**
+
+Restart:
+
+- cùng 1 máy
+- có downtime
+
+Failover:
+
+- chuyển sang máy khác
+- downtime rất ngắn hoặc không có
+
+- Chuyển node là gì?
+
+> Chuyển node = đổi vai trò giữa các node
+
+Thường là:
+
+- Reader → Writer
+- Writer cũ → bỏ
+
+- Multi-AZ (liên quan HA)
+
+**AZ là gì?**
+
+> AZ = Availability Zone = 1 datacenter
+
+**Multi-AZ nghĩa là:**
+
+- DB có bản sao ở AZ khác
+- 1 datacenter chết → còn cái khác
+
+**Aurora HA khác RDS chỗ nào?**
+
+RDS (Multi-AZ)
+
+- 1 writer
+- 1 standby
+- Failover: 1–2 phút
+
+Aurora
+
+- Storage phân tán
+- Nhiều reader
+- Failover: vài chục giây
+
+  👉 Vì thế Aurora đắt hơn
+
 ## Compute
 
 ### EC2(Elastic Compute Cloud)
@@ -190,7 +268,84 @@ Vì Lambda có 3 đặc điểm rất độc:
 
 ## Database
 
-Database cluster là gì?
+> Database = nơi lưu trạng thái sống còn của hệ thống
+
+Infra quan tâm DB không phải ở:
+
+- câu SQL
+- index
+- ORM
+
+mà ở:
+
+- độ ổn định
+- scale
+- backup
+- failover
+- connection
+
+### RDS(Amazon Relational Database Service) là gì?
+
+> RDS = Database do AWS quản lý hộ
+> RDS không phải là 1 loại DB, mà là dịch vụ
+
+RDS có thể chạy:
+
+- MySQL
+- PostgreSQL
+- MariaDB
+- SQL Server
+- Oracle
+
+👉 AWS lo:
+
+- tạo DB
+- backup
+- patch
+- monitoring
+
+👉 User chỉ:
+
+- connect
+- dùng
+
+**RDS phù hợp khi**
+
+App vừa và nhỏ
+Query không quá nặng
+Team chưa muốn phức tạp
+
+### Aurora là gì?
+
+> Aurora = database “đặc biệt” của AWS
+> Aurora = MySQL/Postgres-compatible nhưng do AWS viết lại
+
+- Không phải MySQL thuần
+- Không phải Postgres thuần
+- Nhưng app dùng như bình thường
+
+### Tính năng Amazon Aurora
+
+**Hiệu năng cao và khả năng mở rộng**
+
+> Aurora nhanh gấp 5 lần cơ sở dữ liệu MySQL tiêu chuẩn và nhanh gấp 3 lần các cơ sở dữ liệu PostgreSQL chuẩn mà không cần yêu cầu thay đổi gì đến các ứng dụng có sẵn.
+> Amazon Aurora tự động tăng dung lượng khi cần thiết, tối đa 64TB trên mỗi cơ sở dữ liệu.
+
+**Tính khả dụng và độ bền cao**
+
+- Có kho chứa lỗi và tự phục hồi
+- Aurora liên tục sao lưu dữ liệu của bạn lên Amazon S3 và khôi phục lại từ những thất bại trong việc lưu trữ vật lý
+- Amazon Aurora cung cấp nhiều mức độ bảo mật cho cơ sở dữ liệu
+
+**Tương thích MySQL và PostgreSQL**
+
+**Quản lý hoàn toàn**
+
+- Amazon Aurora được quản lý đầy đủ bởi Amazon Relational Database Service (RDS)
+- Aurora tự động và liên tục giám sát và sao lưu cơ sở dữ liệu của bạn lên Amazon S3, cho phép khôi phục từng điểm một.
+- Có thể theo dõi hiệu suất của cơ sở dữ liệu bằng cách sử dụng Amazon CloudWatch, Enhanced Monitoring, or Performance Insights
+
+### Database cluster là gì?
 
 ```
 Aurora Cluster
@@ -201,6 +356,53 @@ Aurora Cluster
 - 1 node ghi
 - Nhiều node đọc
 - Failover tự động
+
+### Aurora Cluster là gì?
+
+Aurora luôn luôn là cluster:
+
+```
+Aurora Cluster
+ ├─ Writer node (ghi)
+ ├─ Reader node #1
+ ├─ Reader node #2
+ └─ Distributed Storage
+```
+
+### So sánh RDS vs Aurora
+
+| Tiêu chí    | **RDS**             | **Aurora**       |
+| ----------- | ------------------- | ---------------- |
+| Bản chất    | Managed DB          | Cloud-native DB  |
+| Storage     | Gắn với instance    | Distributed      |
+| HA          | Multi-AZ (chậm hơn) | Built-in (nhanh) |
+| Scale read  | Có replica          | Rất mạnh         |
+| Cost        | Rẻ hơn              | Đắt hơn          |
+| Độ phức tạp | Thấp                | Cao hơn          |
+| Hay dùng ở  | App nhỏ–vừa         | App lớn / scale  |
+
+### RDS Proxy / DB Proxy đứng ở đâu?
+
+Nhớ sơ đồ này:
+
+```
+App
+ ↓
+RDS Proxy
+ ↓
+RDS / Aurora
+```
+
+Proxy:
+
+- giữ connection
+- bảo vệ DB
+
+DB:
+
+- tập trung xử lý data
+
+👉 Proxy dùng được cho cả RDS và Aurora
 
 ## Networking
 
@@ -225,7 +427,7 @@ Có 2 loại:
 
 **Public Subnet**
 
-Có đường ra Internet
+Được sử dụng cho các tài nguyên mà yêu cầu phải kết nối với mạng internet bên ngoài như web servers
 
 Dùng cho:
 
@@ -233,7 +435,9 @@ Dùng cho:
 - Bastion (nếu có)
 - Private Subnet
 
-Không ra Internet trực tiếp
+**Private Subnet**
+
+Được sử dụng cho các tài nguyên mà không cần kết nối với mạng internet như databases chẳng hạn.
 
 Dùng cho:
 
