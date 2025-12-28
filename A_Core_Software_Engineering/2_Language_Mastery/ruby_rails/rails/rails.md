@@ -111,6 +111,92 @@ Key Points
 - Tránh string interpolation (#{}) trong SQL queries
 - Luôn sanitize/whitelist cho các phần không thể parameterize (ORDER BY, column names, table names)
 
+#### Stored Procedures
+
+Stored Procedure là một đoạn code SQL được lưu trữ sẵn trong database, có thể gọi lại nhiều lần. Giống như một function trong programming.
+
+Rails KHÔNG khuyến khích dùng Stored Procedures vì:
+
+- Logic nên ở application layer (MVC pattern)
+- Khó maintain, test, version control
+- Lock vào database cụ thể (MySQL, PostgreSQL khác nhau)
+
+Nhưng nếu cần dùng
+
+```ruby
+# Gọi stored procedure trong Rails
+ActiveRecord::Base.connection.execute("CALL GetUserByEmail(?)", params[:email])
+
+# Hoặc với PostgreSQL function
+result = ActiveRecord::Base.connection.select_all(
+  "SELECT * FROM get_user_by_email($1)",
+  "SQL",
+  [[nil, params[:email]]]
+)
+```
+
+Khi nào nên dùng Stored Procedures?
+✅ Nên dùng khi:
+
+- Logic nghiệp vụ phức tạp cần nhiều queries (giảm round-trips)
+- Shared database giữa nhiều applications
+- Legacy systems đã có sẵn stored procedures
+- Performance critical operations với data lớn
+
+❌ KHÔNG nên dùng khi:
+
+- Application đơn giản với ActiveRecord đủ dùng
+- Team không có DBA hoặc kỹ năng SQL mạnh
+- Cần deploy nhanh, CI/CD linh hoạt
+- Logic cần test unit thường xuyên
+
+#### Allow-list Input Validation
+
+Allow-list (whitelist) là kỹ thuật chỉ cho phép các giá trị hợp lệ từ danh sách định sẵn. Từ chối tất cả những gì không nằm trong danh sách.
+
+Khi nào cần Allow-list?
+
+| Trường hợp | Cần Allow-list? | Lý do |
+|------------|----------------|-------|
+| User input vào WHERE value | ❌ Không | Dùng Prepared Statements |
+| Column name động | ✅ Có | Không parameterize được |
+| Table name động | ✅ Có | Không parameterize được |
+| ORDER BY, LIMIT | ✅ Có | Không parameterize được |
+| Fixed values | ❌ Không | Hard-code trong code |
+
+Key Points
+
+1. **Allow-list là lớp bảo vệ thứ 2** khi Prepared Statements không đủ
+2. **LUÔN dùng allow-list** cho: column names, table names, ORDER BY, SQL keywords
+3. **Blacklist = Bad**, Allow-list = Good
+4. **Fail secure**: Từ chối mọi thứ không trong list
+5. **Rails tip**: Dùng constants, symbols, và `column_names` để validate
+
+
+```ruby
+# ✅ AN TOÀN - Allow-list
+def index
+  allowed_columns = ['name', 'email', 'created_at', 'updated_at']
+  sort_column = allowed_columns.include?(params[:sort_by]) ? params[:sort_by] : 'id'
+  
+  @users = User.order(sort_column)
+end
+```
+
+#### Escaping All User Supplied Input
+
+Escaping là kỹ thuật escape (thoát) các ký tự đặc biệt trong user input để chúng được xử lý như literal text, không phải SQL syntax.
+
+Được khuyến nghị không dùng(Sẽ là biện pháp cuối cùng)
+
+Tại sao Escaping là "last resort"?
+
+- Dễ quên escape một chỗ nào đó
+- Khác nhau giữa các databases (MySQL vs PostgreSQL vs SQL Server)
+- Encoding issues (UTF-8, Unicode, multi-byte characters)
+- Context-dependent - escape rules thay đổi tùy context
+- Maintainability - Code khó maintain, dễ introduce bugs
+
 #### Nguồn
 
 https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html
