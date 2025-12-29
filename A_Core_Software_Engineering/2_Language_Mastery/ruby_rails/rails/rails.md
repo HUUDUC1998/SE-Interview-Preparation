@@ -197,6 +197,17 @@ Tại sao Escaping là "last resort"?
 - Context-dependent - escape rules thay đổi tùy context
 - Maintainability - Code khó maintain, dễ introduce bugs
 
+#### Một số phương pháp khác
+
+Ngoài 4 phướng pháp trên thì cũng nên suy xét và áp dụng các phương pháp sau để nâng cao khả năng bảo mật
+
+- Hạn chế quyền truy cập (Least Privilege)
+
+    - Để giảm thiểu thiệt hại tiềm tàng của một cuộc tấn công SQL injection thành công, bạn nên giảm thiểu quyền hạn được gán cho mỗi tài khoản cơ sở dữ liệu trong môi trường của mình. Hãy bắt đầu từ những bước cơ bản nhất để xác định các quyền truy cập mà tài khoản ứng dụng của bạn cần, thay vì cố gắng tìm ra những quyền truy cập mà bạn cần loại bỏ. 
+
+- Allow-list Input Validation
+    - Tham khảo : https://cheatsheetseries.owasp.org/cheatsheets/Input_Validation_Cheat_Sheet.html
+
 #### Nguồn
 
 https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html
