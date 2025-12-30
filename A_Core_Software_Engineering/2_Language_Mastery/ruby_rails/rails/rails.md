@@ -211,3 +211,35 @@ Ngoài 4 phướng pháp trên thì cũng nên suy xét và áp dụng các phư
 #### Nguồn
 
 https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html
+
+### CSRF (Cross-Site Request Forgery)
+
+CSRF (Cross-Site Request Forgery) hay còn gọi XSRF, Session Riding là kỹ thuật tấn công lừa user thực hiện hành động không mong muốn trên website mà họ đã đăng nhập.
+
+Cách hoạt động của CSRF Attack
+Scenario thực tế:
+
+```
+1. User đăng nhập vào bank.com
+   → Browser lưu session cookie
+
+2. User vẫn đang login, mở tab khác browse web
+   
+3. User vào evil.com (do hacker tạo)
+   
+4. evil.com chứa code ẩn:
+   <form action="https://bank.com/transfer" method="POST">
+     <input name="to" value="hacker_account">
+     <input name="amount" value="1000000">
+   </form>
+   <script>document.forms[0].submit()</script>
+   
+5. Browser TỰ ĐỘNG gửi request đến bank.com
+   kèm theo session cookie (vì user vẫn đang login)
+   
+6. bank.com nhận request từ user đã authenticated
+   → Chuyển tiền cho hacker!
+```
+
+Trong Rails có hỗ trợ bảo về khỏi CSRF. Tham khảo: https://guides.rubyonrails.org/security.html#cross-site-request-forgery-csrf
+
